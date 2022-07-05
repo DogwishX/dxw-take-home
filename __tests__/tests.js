@@ -1,6 +1,12 @@
-describe("unit test", () => {
-  test("sum", () => {
-    const sum = 1 + 1;
-    return expect(sum, 1);
+const testInput = document.querySelector("input");
+const testButton = document.querySelector("button");
+
+describe("When user clicks search", () => {
+  test("random string", () => {
+    testInput.value = "test";
+
+    testButton.click();
+    const newParagraph = document.querySelector("p");
+    return equal(newParagraph.textContent, "test");
   });
 });

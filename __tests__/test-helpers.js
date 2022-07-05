@@ -15,7 +15,6 @@ function test(testName, testFunction) {
     );
 
   console.groupEnd();
-  resetTestEnvironment();
   return { result };
 }
 
