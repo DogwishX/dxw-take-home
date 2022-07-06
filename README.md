@@ -1,7 +1,5 @@
 # 📖🔍 Organisation Acronym Search 🔍📖
 
-## dxw take home challenge
-
 A UK Government acronym search, that allows users to search for an acronym, and will return the matching organisation for that acronym
 
 Live website available [here](https://dogwishx.github.io/dxw-take-home/)
