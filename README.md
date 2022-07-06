@@ -12,7 +12,7 @@ name for that acronym if one exists [#2][i2]
 - [ ] If no such acronym exists, an appropriate message is displayed [#3][i3] 
 - [ ] An autocomplete is available on the search box, so that as a user begins to type
 acronyms that match the letters they entered are presented in a dropdown  [#4][i4]
-- [ ] Partial matching is available (e.g. if a user searches for “DC”, results are returned for
+- [X] Partial matching is available (e.g. if a user searches for “DC”, results are returned for
 both “DCMS” and “DCLG”) [#5][i5]
 
 
