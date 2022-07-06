@@ -13,7 +13,7 @@ describe("When user searches based on acronym", () => {
   test("list should reset after each search", () => {
     emulateInputAndClick("NS&I");
     emulateInputAndClick("T"); // Returns 6 orgs that contain 'T'
-    return equal(testList.children.length, 6);
+    return equal(testList.children.length, 8);
   });
 
   test("the correct organisation name is being displayed", () => {
@@ -30,6 +30,11 @@ describe("When user searches based on acronym", () => {
     const wmi = document.querySelector("h2[data-acronym='VAT']");
 
     return equal(wmi.textContent, "VAT");
+  });
+
+  test("searches should be case insensitve", () => {
+    emulateInputAndClick("sRo");
+    return equal(testList.children.length, 1);
   });
 });
 

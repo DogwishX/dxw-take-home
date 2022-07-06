@@ -15,7 +15,9 @@ function search() {
 }
 
 function filterOrgData() {
-  return orgsData.filter((org) => org.acronym.includes(searchBar.value));
+  return orgsData.filter((org) =>
+    org.acronym.toLowerCase().includes(searchBar.value.toLowerCase())
+  );
 }
 
 function createOrgCard({ acronym, name }) {
