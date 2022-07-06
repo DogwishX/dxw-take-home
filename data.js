@@ -431,3 +431,5 @@ const orgsData = [
     name: "Workforce Management Information",
   },
 ];
+
+export default orgsData;

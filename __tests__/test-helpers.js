@@ -15,7 +15,7 @@ function test(testName, testFunction) {
     );
 
   console.groupEnd();
-  return { result };
+  resetTestElements();
 }
 
 function createFormattedConsoleGroup(testName, result) {
@@ -34,13 +34,23 @@ function equal(actual, expected) {
   };
 }
 
-function $(object) {
-  return JSON.stringify(object);
-}
-
 function trueTypeOf(element) {
   const regex = /\[object |[\]]/g;
   const prototypeString = Object.prototype.toString.call(element); // returns [object Type]
 
   return prototypeString.replace(regex, "");
 }
+
+function resetTestElements() {
+  const elementsToReset = [
+    document.querySelector("ul"),
+    document.querySelector("input"),
+  ];
+
+  elementsToReset.forEach((element) => {
+    element.innerHTML = "";
+    element.value = "";
+  });
+}
+
+export { describe, test, equal };
