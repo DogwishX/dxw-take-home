@@ -43,7 +43,8 @@ function trueTypeOf(element) {
 
 function resetTestElements() {
   const elementsToReset = [
-    document.querySelector("ul"),
+    document.querySelector(".results"),
+    document.querySelector(".suggestions"),
     document.querySelector("input"),
   ];
 

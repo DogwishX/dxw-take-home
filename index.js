@@ -2,16 +2,20 @@ import orgsData from "./data.js";
 
 const searchBar = document.querySelector("input");
 const searchButton = document.querySelector("button");
-const resultsList = document.querySelector("ul");
 
 searchButton.addEventListener("click", search);
+searchBar.addEventListener("input", autocomplete);
+
+// Search results
 
 function search() {
-  // Clear previous search results
-  resultsList.innerHTML = "";
+  const resultsList = document.querySelector(".results");
 
-  const searchResults = filterOrgData();
-  searchResults.forEach((item) => createOrgCard(item));
+  handleQuery({
+    list: resultsList,
+    filter: filterOrgData,
+    render: renderOrgCard,
+  });
 }
 
 function filterOrgData() {
@@ -20,17 +24,59 @@ function filterOrgData() {
   );
 }
 
-function createOrgCard({ acronym, name }) {
+function renderOrgCard(list, { acronym, name }) {
   const listItem = document.createElement("li");
   const acronymEl = document.createElement("h2");
   const nameEl = document.createElement("p");
 
   acronymEl.textContent = acronym;
-  acronymEl.dataset.acronym = acronym;
+  acronymEl.dataset.testid = acronym;
 
   nameEl.textContent = name;
-  nameEl.dataset.name = name;
+  nameEl.dataset.testid = name;
 
   listItem.append(acronymEl, nameEl);
-  resultsList.append(listItem);
+  list.append(listItem);
+}
+
+// Autocomplete/Search suggestions
+
+function autocomplete() {
+  const suggestionsList = document.querySelector(".suggestions");
+
+  if (searchBar.value === "") return (suggestionsList.innerHTML = "");
+
+  handleQuery({
+    list: suggestionsList,
+    filter: filterSuggestions,
+    render: renderSuggestion,
+  });
+}
+
+function filterSuggestions(latestValue) {
+  return orgsData.filter((item) => itemMatchesStrictRegex(item, latestValue));
+}
+
+function renderSuggestion(list, { acronym }) {
+  const listItem = document.createElement("li");
+
+  listItem.innerText = acronym;
+  listItem.dataset.testid = `suggestion-${acronym}`;
+
+  list.append(listItem);
+}
+
+// Helper functions
+
+function handleQuery({ list, filter, render }) {
+  // Clear previous search results
+  list.innerHTML = "";
+
+  const results = filter();
+  results.forEach((item) => render(list, item));
+}
+
+function itemMatchesStrictRegex({ acronym }) {
+  const strictRegex = new RegExp(`^${searchBar.value}`, "i");
+  return strictRegex.test(acronym);
 }
