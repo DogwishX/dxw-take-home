@@ -1,7 +1,7 @@
 import orgsData from "./data.js";
 
 const searchBar = document.querySelector("input");
-const searchButton = document.querySelector("button");
+const searchButton = document.querySelector(".search__button");
 
 searchButton.addEventListener("click", search);
 searchBar.addEventListener("input", autocomplete);
@@ -16,6 +16,10 @@ function search() {
     filter: filterOrgData,
     render: renderOrgCard,
   });
+
+  if (resultsList.children.length === 0)
+    resultsList.innerHTML = "No organisations found";
+  searchBar.value = "";
 }
 
 function filterOrgData() {
@@ -61,7 +65,12 @@ function renderSuggestion(list, { acronym }) {
   const listItem = document.createElement("li");
 
   listItem.innerText = acronym;
-  listItem.dataset.testid = `suggestion-${acronym}`;
+  listItem.classList.add("suggestions__item");
+  listItem.addEventListener("click", () => {
+    searchBar.value = acronym;
+    search();
+    list.innerHTML = "";
+  });
 
   list.append(listItem);
 }

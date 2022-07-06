@@ -2,7 +2,7 @@ import { describe, test, equal } from "./test-helpers.js";
 
 const testResultList = document.querySelector(".results");
 const testInput = document.querySelector("input");
-const testButton = document.querySelector("button");
+const testButton = document.querySelector(".search__button");
 
 describe("When user searches based on acronym", () => {
   test("results length is 1 when only one result is found", () => {
@@ -37,8 +37,6 @@ describe("When user searches based on acronym", () => {
     return equal(testResultList.children.length, 1);
   });
 });
-
-describe("Autocomplete related tasks", () => {});
 
 function emulateInputAndClick(text) {
   testInput.value = text;
