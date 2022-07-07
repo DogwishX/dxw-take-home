@@ -12,7 +12,7 @@ This project includes a custom test environment which runs in the browser's cons
 box [#1][i1]
 - [x] When they search for an acronym, the application displays the full organisation
 name for that acronym if one exists [#2][i2]
-- [ ] If no such acronym exists, an appropriate message is displayed [#3][i3] 
+- [X] If no such acronym exists, an appropriate message is displayed [#3][i3] 
 - [x] An autocomplete is available on the search box, so that as a user begins to type
 acronyms that match the letters they entered are presented in a dropdown  [#4][i4]
 - [X] Partial matching is available (e.g. if a user searches for “DC”, results are returned for
