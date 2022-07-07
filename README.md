@@ -4,6 +4,9 @@ A UK Government acronym search, that allows users to search for an acronym, and 
 
 Live website available [here](https://dogwishx.github.io/dxw-take-home/)
 
+This project includes a custom test environment which runs in the browser's console.
+
+
 ### User stories:
 - [x] When the user first loads the application, they are presented with a free text search
 box [#1][i1]
