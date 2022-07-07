@@ -66,8 +66,8 @@ function autocomplete() {
   });
 }
 
-function filterSuggestions(latestValue) {
-  return orgsData.filter((item) => itemMatchesStrictRegex(item, latestValue));
+function filterSuggestions() {
+  return orgsData.filter((item) => itemMatchesStrictRegex(item));
 }
 
 function renderSuggestion(list, { acronym }) {
