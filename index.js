@@ -8,7 +8,11 @@ searchBar.addEventListener("input", autocomplete);
 
 // Search results
 
-function search() {
+function search(event) {
+  if (searchBar.value === "") return;
+
+  clearSuggestionsList();
+  event.preventDefault();
   const resultsList = document.querySelector(".results");
 
   handleQuery({
@@ -19,6 +23,7 @@ function search() {
 
   if (resultsList.children.length === 0)
     resultsList.innerHTML = "No organisations found";
+
   searchBar.value = "";
 }
 
@@ -33,11 +38,15 @@ function renderOrgCard(list, { acronym, name }) {
   const acronymEl = document.createElement("h2");
   const nameEl = document.createElement("p");
 
+  listItem.classList.add("results__card");
+
   acronymEl.textContent = acronym;
   acronymEl.dataset.testid = acronym;
+  acronymEl.classList.add("results__acronym");
 
   nameEl.textContent = name;
   nameEl.dataset.testid = name;
+  nameEl.classList.add("results__name");
 
   listItem.append(acronymEl, nameEl);
   list.append(listItem);
@@ -48,7 +57,7 @@ function renderOrgCard(list, { acronym, name }) {
 function autocomplete() {
   const suggestionsList = document.querySelector(".suggestions");
 
-  if (searchBar.value === "") return (suggestionsList.innerHTML = "");
+  if (searchBar.value === "") return clearSuggestionsList();
 
   handleQuery({
     list: suggestionsList,
@@ -63,15 +72,18 @@ function filterSuggestions(latestValue) {
 
 function renderSuggestion(list, { acronym }) {
   const listItem = document.createElement("li");
+  const suggestionButton = document.createElement("button");
 
-  listItem.innerText = acronym;
-  listItem.classList.add("suggestions__item");
-  listItem.addEventListener("click", () => {
+  suggestionButton.innerHTML = `<i class="fa fa-search" aria-hidden="true"></i>
+${acronym}`;
+  suggestionButton.classList.add("suggestions__item");
+  suggestionButton.addEventListener("click", (event) => {
+    event.preventDefault();
     searchBar.value = acronym;
-    search();
+    search(event);
     list.innerHTML = "";
   });
-
+  listItem.append(suggestionButton);
   list.append(listItem);
 }
 
@@ -88,4 +100,9 @@ function handleQuery({ list, filter, render }) {
 function itemMatchesStrictRegex({ acronym }) {
   const strictRegex = new RegExp(`^${searchBar.value}`, "i");
   return strictRegex.test(acronym);
+}
+
+function clearSuggestionsList() {
+  const suggestionsList = document.querySelector(".suggestions");
+  suggestionsList.innerHTML = "";
 }

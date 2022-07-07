@@ -8,12 +8,24 @@
     <title>Document</title>
   </head>
   <body>
-    <input type="text" />
-    <ul class="suggestions"></ul>
-    <button class="search__button">Search</button>
+    <header>
+      <h1>UK GOV Organization Search</h1>
+      <form action="" onsubmit="search(); return false">
+        <div class="search-container">
+          <input type="text" class="searchbar" />
+          <ul class="suggestions"></ul>
+        </div>
+        <button class="search__button">Search</button>
+      </form>
+    </header>
 
     <ul class="results"></ul>
 
+    <!-- Font Awesome Icon Library -->
+    <script
+      src="https://kit.fontawesome.com/248cd170f1.js"
+      crossorigin="anonymous"
+    ></script>
     <script type="module">
       import "./index.js";
       import "./__tests__/tests.js";
